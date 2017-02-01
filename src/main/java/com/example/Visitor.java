@@ -8,15 +8,15 @@ package com.example;
  */
 public interface Visitor {
 
-	/**
-	 * Visits binary operation and possibly returns
-	 * evaluation result
-	 */
-	Node visit(BinaryOperation binaryOperation);
+    /**
+     * Visits binary operation and possibly returns
+     * evaluation result
+     */
+    Node visit(BinaryOperation binaryOperation);
 
-	/**
-	 * Visits constant expression and possibly returns
-	 * evaluation result
-	 */
-	<T> Node visit(Constant<T> constant);
+    /**
+     * Visits constant expression and possibly returns
+     * evaluation result
+     */
+    <T> Node visit(Constant<T> constant);
 }

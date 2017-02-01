@@ -7,9 +7,9 @@ package com.example;
  */
 public interface Node {
 
-	/**
-	 * Accepts visitor to traverse whole tree
-	 * and probably return some value
-	 */
-	Node accept(Visitor visitor);
+    /**
+     * Accepts visitor to traverse whole tree
+     * and probably return some value
+     */
+    Node accept(Visitor visitor);
 }

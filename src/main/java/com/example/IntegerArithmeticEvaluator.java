@@ -15,32 +15,32 @@ package com.example;
  */
 public class IntegerArithmeticEvaluator implements Visitor {
 
-	@Override
-	public Node visit(BinaryOperation binaryOperation) {
-		Node left = binaryOperation.getLeft();
-		Node right = binaryOperation.getRight();
-		Operator operator = binaryOperation.getOperator();
+    @Override
+    public Node visit(BinaryOperation binaryOperation) {
+        Node left = binaryOperation.getLeft();
+        Node right = binaryOperation.getRight();
+        Operator operator = binaryOperation.getOperator();
 
-		Integer leftValue = ((IntegerNode) left.accept(this)).getValue();
-		Integer rightValue = ((IntegerNode) right.accept(this)).getValue();
-		Integer value;
+        Integer leftValue = ((IntegerNode) left.accept(this)).getValue();
+        Integer rightValue = ((IntegerNode) right.accept(this)).getValue();
+        Integer value;
 
-		if (operator.is(Operator.ADDITION)) {
-			value = leftValue + rightValue;
-		} else if (operator.is(Operator.MULTIPLICATION)) {
-			value = leftValue * rightValue;
-		} else if (operator.is(Operator.SUBTRACTION)) {
-			value = leftValue - rightValue;
-		} else if (operator.is(Operator.DIVISION)) {
-			value = leftValue / rightValue;
-		} else {
-			throw new UnsupportedOperationException("Unknown operator: \"" + operator + "\"");
-		}
-		return new IntegerNode(value);
-	}
+        if (operator.is(Operator.ADDITION)) {
+            value = leftValue + rightValue;
+        } else if (operator.is(Operator.MULTIPLICATION)) {
+            value = leftValue * rightValue;
+        } else if (operator.is(Operator.SUBTRACTION)) {
+            value = leftValue - rightValue;
+        } else if (operator.is(Operator.DIVISION)) {
+            value = leftValue / rightValue;
+        } else {
+            throw new UnsupportedOperationException("Unknown operator: \"" + operator + "\"");
+        }
+        return new IntegerNode(value);
+    }
 
-	@Override
-	public <T> Node visit(Constant<T> constant) {
-		return constant;
-	}
+    @Override
+    public <T> Node visit(Constant<T> constant) {
+        return constant;
+    }
 }

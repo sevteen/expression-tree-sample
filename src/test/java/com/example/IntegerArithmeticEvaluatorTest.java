@@ -12,88 +12,88 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 public class IntegerArithmeticEvaluatorTest {
 
-	private IntegerArithmeticEvaluator evaluator;
+    private IntegerArithmeticEvaluator evaluator;
 
-	@Before
-	public void setUp() throws Exception {
-		evaluator = new IntegerArithmeticEvaluator();
-	}
+    @Before
+    public void setUp() throws Exception {
+        evaluator = new IntegerArithmeticEvaluator();
+    }
 
-	@Test
-	public void canEvaluateIntegerNode() throws Exception {
-		Node result = new IntegerNode(32).accept(evaluator);
+    @Test
+    public void canEvaluateIntegerNode() throws Exception {
+        Node result = new IntegerNode(32).accept(evaluator);
 
-		assertNodeHasValue(result, 32);
-	}
+        assertNodeHasValue(result, 32);
+    }
 
-	@Test
-	public void canAddIntegers() throws Exception {
-		Node result = new BinaryOperation(Operator.ADDITION, new IntegerNode(32), new IntegerNode(2))
-				.accept(evaluator);
+    @Test
+    public void canAddIntegers() throws Exception {
+        Node result = new BinaryOperation(Operator.ADDITION, new IntegerNode(32), new IntegerNode(2))
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 34);
-	}
+        assertNodeHasValue(result, 34);
+    }
 
-	@Test
-	public void canSubtractIntegers() throws Exception {
-		Node result = new BinaryOperation(Operator.SUBTRACTION, new IntegerNode(32), new IntegerNode(2))
-				.accept(evaluator);
+    @Test
+    public void canSubtractIntegers() throws Exception {
+        Node result = new BinaryOperation(Operator.SUBTRACTION, new IntegerNode(32), new IntegerNode(2))
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 30);
-	}
+        assertNodeHasValue(result, 30);
+    }
 
-	@Test
-	public void canMultiplyIntegers() throws Exception {
-		Node result = new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(32), new IntegerNode(2))
-				.accept(evaluator);
+    @Test
+    public void canMultiplyIntegers() throws Exception {
+        Node result = new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(32), new IntegerNode(2))
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 64);
-	}
+        assertNodeHasValue(result, 64);
+    }
 
-	@Test
-	public void canDivideIntegers() throws Exception {
-		Node result = new BinaryOperation(Operator.DIVISION, new IntegerNode(32), new IntegerNode(2))
-				.accept(evaluator);
+    @Test
+    public void canDivideIntegers() throws Exception {
+        Node result = new BinaryOperation(Operator.DIVISION, new IntegerNode(32), new IntegerNode(2))
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 16);
-	}
+        assertNodeHasValue(result, 16);
+    }
 
-	@Test
-	public void canEvaluateComplexExpressionAsInteger() throws Exception {
-		Node result = new BinaryOperation(Operator.ADDITION, // 4 + (3 + 15)
-				new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
-				new BinaryOperation(Operator.ADDITION, // 3 + 15
-						new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
-						new IntegerNode(3))) // 3
-				.accept(evaluator);
+    @Test
+    public void canEvaluateComplexExpressionAsInteger() throws Exception {
+        Node result = new BinaryOperation(Operator.ADDITION, // 4 + (3 + 15)
+            new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
+            new BinaryOperation(Operator.ADDITION, // 3 + 15
+                new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
+                new IntegerNode(3))) // 3
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 22);
-	}
+        assertNodeHasValue(result, 22);
+    }
 
-	@Test
-	public void canEvaluateComplexExpression2AsInteger() throws Exception {
-		Node result = new BinaryOperation(Operator.ADDITION, // 25
-				new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
-				new BinaryOperation(Operator.ADDITION, // 21
-						new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
-						new BinaryOperation(Operator.SUBTRACTION,  // 6
-								new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(5), new IntegerNode(2)), // 10
-								new BinaryOperation(Operator.DIVISION, new IntegerNode(20), new IntegerNode(5))))) // 4
-				.accept(evaluator);
+    @Test
+    public void canEvaluateComplexExpression2AsInteger() throws Exception {
+        Node result = new BinaryOperation(Operator.ADDITION, // 25
+            new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
+            new BinaryOperation(Operator.ADDITION, // 21
+                new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
+                new BinaryOperation(Operator.SUBTRACTION,  // 6
+                    new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(5), new IntegerNode(2)), // 10
+                    new BinaryOperation(Operator.DIVISION, new IntegerNode(20), new IntegerNode(5))))) // 4
+            .accept(evaluator);
 
-		assertNodeHasValue(result, 25);
-	}
+        assertNodeHasValue(result, 25);
+    }
 
-	private void assertNodeHasValue(Node result, int expectedValue) {
-		assertThat(result).isInstanceOf(IntegerNode.class);
-		assertThat(((IntegerNode) result).getValue().intValue()).isEqualTo(expectedValue);
-	}
+    private void assertNodeHasValue(Node result, int expectedValue) {
+        assertThat(result).isInstanceOf(IntegerNode.class);
+        assertThat(((IntegerNode) result).getValue().intValue()).isEqualTo(expectedValue);
+    }
 
-	@Test
-	public void shouldThrowUnsupportedOperationExceptionWhenUnknownOperatorIsUsed() throws Exception {
-		assertThatThrownBy(() -> new BinaryOperation(new Operator("xor"), new IntegerNode(3), new IntegerNode(52))
-				.accept(evaluator))
-				.isInstanceOf(UnsupportedOperationException.class)
-				.hasMessageContaining("Unknown operator");
-	}
+    @Test
+    public void shouldThrowUnsupportedOperationExceptionWhenUnknownOperatorIsUsed() throws Exception {
+        assertThatThrownBy(() -> new BinaryOperation(new Operator("xor"), new IntegerNode(3), new IntegerNode(52))
+            .accept(evaluator))
+            .isInstanceOf(UnsupportedOperationException.class)
+            .hasMessageContaining("Unknown operator");
+    }
 }

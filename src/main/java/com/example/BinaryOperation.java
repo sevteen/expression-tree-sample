@@ -8,29 +8,29 @@ package com.example;
  */
 public class BinaryOperation implements Node {
 
-	private Operator operator;
-	private Node left;
-	private Node right;
+    private Operator operator;
+    private Node left;
+    private Node right;
 
-	public BinaryOperation(Operator operator, Node left, Node right) {
-		this.operator = operator;
-		this.left = left;
-		this.right = right;
-	}
+    public BinaryOperation(Operator operator, Node left, Node right) {
+        this.operator = operator;
+        this.left = left;
+        this.right = right;
+    }
 
-	public Operator getOperator() {
-		return operator;
-	}
+    public Operator getOperator() {
+        return operator;
+    }
 
-	public Node getLeft() {
-		return left;
-	}
+    public Node getLeft() {
+        return left;
+    }
 
-	public Node getRight() {
-		return right;
-	}
+    public Node getRight() {
+        return right;
+    }
 
-	public Node accept(Visitor visitor) {
-		return visitor.visit(this);
-	}
+    public Node accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
 }

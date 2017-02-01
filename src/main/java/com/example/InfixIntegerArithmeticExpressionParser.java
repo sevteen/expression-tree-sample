@@ -16,25 +16,25 @@ package com.example;
  */
 public class InfixIntegerArithmeticExpressionParser implements ExpressionParser {
 
-	@Override
-	public Node parse(String expression) {
-		String[] operands = expression.split("\\+");
-		if (operands.length > 1) {
+    @Override
+    public Node parse(String expression) {
+        String[] operands = expression.split("\\+");
+        if (operands.length > 1) {
 
-			BinaryOperation op = new BinaryOperation(Operator.ADDITION,
-					intNode(operands[operands.length - 2]),
-					intNode(operands[operands.length - 1]));
+            BinaryOperation op = new BinaryOperation(Operator.ADDITION,
+                intNode(operands[operands.length - 2]),
+                intNode(operands[operands.length - 1]));
 
-			for (int i = operands.length - 3; i >= 0; i--) {
-				op = new BinaryOperation(Operator.ADDITION, intNode(operands[i]), op);
-			}
+            for (int i = operands.length - 3; i >= 0; i--) {
+                op = new BinaryOperation(Operator.ADDITION, intNode(operands[i]), op);
+            }
 
-			return op;
-		}
-		return new IntegerNode(Integer.valueOf(expression));
-	}
+            return op;
+        }
+        return new IntegerNode(Integer.valueOf(expression));
+    }
 
-	private IntegerNode intNode(String op) {
-		return new IntegerNode(Integer.valueOf(op.trim()));
-	}
+    private IntegerNode intNode(String op) {
+        return new IntegerNode(Integer.valueOf(op.trim()));
+    }
 }

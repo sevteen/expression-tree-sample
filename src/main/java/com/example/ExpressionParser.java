@@ -5,10 +5,10 @@ package com.example;
  */
 public interface ExpressionParser {
 
-	/**
-	 * Parses raw expression represented as tree into AST
-	 *
-	 * @throws IllegalArgumentException if expression is invalid
-	 */
-	Node parse(String expression);
+    /**
+     * Parses raw expression represented as tree into AST
+     *
+     * @throws IllegalArgumentException if expression is invalid
+     */
+    Node parse(String expression);
 }
