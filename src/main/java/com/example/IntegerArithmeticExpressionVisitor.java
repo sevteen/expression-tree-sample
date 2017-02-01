@@ -13,7 +13,7 @@ package com.example;
  *
  * @author beka
  */
-public class IntegerArithmeticEvaluator implements Visitor {
+public class IntegerArithmeticExpressionVisitor implements Visitor {
 
     @Override
     public Node visit(BinaryOperation binaryOperation) {

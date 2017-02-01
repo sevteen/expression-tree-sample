@@ -1,7 +1,7 @@
 package com.example;
 
 /**
- * Parses infix integer expressions, such as:
+ * Parses infix integer arithmetic expressions, such as:
  * <ul>
  * <li>5</li>
  * <li>5 + 3</li>

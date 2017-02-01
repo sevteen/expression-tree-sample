@@ -10,13 +10,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * @author beka
  */
-public class IntegerArithmeticEvaluatorTest {
+public class IntegerArithmeticExpressionVisitorTest {
 
-    private IntegerArithmeticEvaluator evaluator;
+    private IntegerArithmeticExpressionVisitor evaluator;
 
     @Before
     public void setUp() throws Exception {
-        evaluator = new IntegerArithmeticEvaluator();
+        evaluator = new IntegerArithmeticExpressionVisitor();
     }
 
     @Test
