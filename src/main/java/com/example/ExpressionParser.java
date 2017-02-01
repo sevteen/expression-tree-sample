@@ -6,7 +6,7 @@ package com.example;
 public interface ExpressionParser {
 
     /**
-     * Parses raw expression represented as tree into AST
+     * Parses raw expression represented as string into AST
      *
      * @throws IllegalArgumentException if expression is invalid
      */
