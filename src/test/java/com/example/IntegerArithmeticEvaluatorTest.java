@@ -21,58 +21,58 @@ public class IntegerArithmeticEvaluatorTest {
 
     @Test
     public void canEvaluateIntegerNode() throws Exception {
-        Node result = new IntegerNode(32).accept(evaluator);
+        Node node = new IntegerNode(32).accept(evaluator);
 
-        assertNodeHasValue(result, 32);
+        assertNodeHasValue(node, 32);
     }
 
     @Test
     public void canAddIntegers() throws Exception {
-        Node result = new BinaryOperation(Operator.ADDITION, new IntegerNode(32), new IntegerNode(2))
+        Node node = new BinaryOperation(Operator.ADDITION, new IntegerNode(32), new IntegerNode(2))
             .accept(evaluator);
 
-        assertNodeHasValue(result, 34);
+        assertNodeHasValue(node, 34);
     }
 
     @Test
     public void canSubtractIntegers() throws Exception {
-        Node result = new BinaryOperation(Operator.SUBTRACTION, new IntegerNode(32), new IntegerNode(2))
+        Node node = new BinaryOperation(Operator.SUBTRACTION, new IntegerNode(32), new IntegerNode(2))
             .accept(evaluator);
 
-        assertNodeHasValue(result, 30);
+        assertNodeHasValue(node, 30);
     }
 
     @Test
     public void canMultiplyIntegers() throws Exception {
-        Node result = new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(32), new IntegerNode(2))
+        Node node = new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(32), new IntegerNode(2))
             .accept(evaluator);
 
-        assertNodeHasValue(result, 64);
+        assertNodeHasValue(node, 64);
     }
 
     @Test
     public void canDivideIntegers() throws Exception {
-        Node result = new BinaryOperation(Operator.DIVISION, new IntegerNode(32), new IntegerNode(2))
+        Node node = new BinaryOperation(Operator.DIVISION, new IntegerNode(32), new IntegerNode(2))
             .accept(evaluator);
 
-        assertNodeHasValue(result, 16);
+        assertNodeHasValue(node, 16);
     }
 
     @Test
     public void canEvaluateComplexExpressionAsInteger() throws Exception {
-        Node result = new BinaryOperation(Operator.ADDITION, // 4 + (3 + 15)
+        Node node = new BinaryOperation(Operator.ADDITION, // 4 + (3 + 15)
             new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
             new BinaryOperation(Operator.ADDITION, // 3 + 15
                 new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
                 new IntegerNode(3))) // 3
             .accept(evaluator);
 
-        assertNodeHasValue(result, 22);
+        assertNodeHasValue(node, 22);
     }
 
     @Test
     public void canEvaluateComplexExpression2AsInteger() throws Exception {
-        Node result = new BinaryOperation(Operator.ADDITION, // 25
+        Node node = new BinaryOperation(Operator.ADDITION, // 25
             new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(2), new IntegerNode(2)), // 4
             new BinaryOperation(Operator.ADDITION, // 21
                 new BinaryOperation(Operator.MULTIPLICATION, new IntegerNode(3), new IntegerNode(5)), // 15
@@ -81,12 +81,7 @@ public class IntegerArithmeticEvaluatorTest {
                     new BinaryOperation(Operator.DIVISION, new IntegerNode(20), new IntegerNode(5))))) // 4
             .accept(evaluator);
 
-        assertNodeHasValue(result, 25);
-    }
-
-    private void assertNodeHasValue(Node result, int expectedValue) {
-        assertThat(result).isInstanceOf(IntegerNode.class);
-        assertThat(((IntegerNode) result).getValue().intValue()).isEqualTo(expectedValue);
+        assertNodeHasValue(node, 25);
     }
 
     @Test
@@ -95,5 +90,10 @@ public class IntegerArithmeticEvaluatorTest {
             .accept(evaluator))
             .isInstanceOf(UnsupportedOperationException.class)
             .hasMessageContaining("Unknown operator");
+    }
+
+    private void assertNodeHasValue(Node node, int expectedValue) {
+        assertThat(node).isInstanceOf(IntegerNode.class);
+        assertThat(((IntegerNode) node).getValue().intValue()).isEqualTo(expectedValue);
     }
 }
